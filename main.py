@@ -1,12 +1,15 @@
 import pygame
-import components.mainMenu as mainMenu
+from components.MainMenu.mainMenu import loadMenu as loadMainMenu, menuListener as mainMenuListener
+
 
 
 ## Base GUI
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
+pygame.display.set_caption("Legends Champions League Simulator")
 clock = pygame.time.Clock()
-running = True
+running = [True, False]
+mainmenu = True
 
 
 gameComponents = {
@@ -14,18 +17,15 @@ gameComponents = {
 }
 
 
-
-while running:
+while running[0]:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
-        elif event.type == pygame.MOUSEMOTION:
-            print(event.pos)
-            print(pygame.display.get_surface().get_size())
-
-    mainMenu.mainMenu(screen)
-        
+    
+    screen.fill((255,0,0))
+    loadMainMenu(screen)
+    if mainmenu:
+        mainMenuListener(screen, pygame.mouse.get_pos())
 
     pygame.display.flip()
 
