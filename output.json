@@ -1,0 +1,85 @@
+{
+    "sixteen-results": {
+        "0": {
+            "winner": "Atletico Madrid",
+            "Borussia Dortmund": 0,
+            "Atletico Madrid": 1
+        },
+        "1": {
+            "winner": "Paris Saint-Germain",
+            "Manchester United": 0,
+            "Paris Saint-Germain": 1
+        },
+        "2": {
+            "winner": "AC Milan",
+            "Real Madrid": 0,
+            "AC Milan": 1
+        },
+        "3": {
+            "winner": "Tottenham Hotspur",
+            "FC Barcelona": 1,
+            "Tottenham Hotspur": 4
+        },
+        "4": {
+            "winner": "Ajax",
+            "Bayern Munich": 5,
+            "Ajax": 6
+        },
+        "5": {
+            "winner": "Porto",
+            "Liverpool": 1,
+            "Porto": 5
+        },
+        "6": {
+            "winner": "Benfica",
+            "Juventus": 1,
+            "Benfica": 3
+        },
+        "7": {
+            "winner": "Manchester City",
+            "Inter Milan": 0,
+            "Manchester City": 1
+        }
+    },
+    "quarter-results": {
+        "0": {
+            "winner": "Paris Saint-Germain",
+            "Atletico Madrid": 5,
+            "Paris Saint-Germain": 6
+        },
+        "1": {
+            "winner": "Tottenham Hotspur",
+            "AC Milan": 0,
+            "Tottenham Hotspur": 2
+        },
+        "2": {
+            "winner": "Porto",
+            "Ajax": 2,
+            "Porto": 6
+        },
+        "3": {
+            "winner": "Manchester City",
+            "Benfica": 1,
+            "Manchester City": 2
+        }
+    },
+    "semi-results": {
+        "0": {
+            "winner": "Tottenham Hotspur",
+            "Paris Saint-Germain": 1,
+            "Tottenham Hotspur": 5
+        },
+        "1": {
+            "winner": "Manchester City",
+            "Porto": 1,
+            "Manchester City": 6
+        }
+    },
+    "finals-results": {
+        "0": {
+            "winner": "Manchester City",
+            "Tottenham Hotspur": 1,
+            "Manchester City": 2
+        }
+    }
+}
