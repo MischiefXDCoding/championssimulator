@@ -20,11 +20,17 @@ numberToWord = {0: "Zero", 1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five",
 resultsLoading = False
 mainMatch = False
 matchCount = 0
-
+commentaryFound = False
+currEndMatchTypeTime = 0
+commentaryCSV = { "Attack": [], "Scoring": [], "Defend": [],  "Foul": [], "Penalty": [], "Ref Decision": [], "Man of the Match": [], "Outcome": [] }
+information = { "clubs": {  }, "commentary": { "Attack": [], "Scoring": [], "Defend": [],  "Foul": [], "Penalty": [], "Ref Decision": [], "Man of the Match": [], "Outcome": [] }, "players": {} }
+totalCommentary = []
 
 def loadGameInformation():
     global gameStore
     global output
+    global commentaryCSV
+    global information
     gameStore = [{ "sixteen-matches": {}, "quarter-matches": {}, "semi-matches": {}, "finals-matches": {}, "quarter-teams": [], "semi-teams": [], "finals-teams": [], "match-types": ["sixteen-matches", "quarter-matches", "semi-matches", "finals-matches"] }]
     information = { "clubs": {  }, "commentary": { "Attack": [], "Scoring": [], "Defend": [],  "Foul": [], "Penalty": [], "Ref Decision": [], "Man of the Match": [], "Outcome": [] }, "players": {} }
     for csvFile in os.listdir((os.getcwd()+"\\components\\MainGame\\data")):
@@ -47,6 +53,7 @@ def loadGameInformation():
     
     allClubs = random.sample(list(information['clubs'].keys()), len(list(information['clubs'].keys())))
     output = {"sixteen-results": {}, "quarter-results": {}, "semi-results": {}, "finals-results": {}}
+    commentaryCSV = information["commentary"]
 
     while len(allClubs) > 0:
         gameStore[0]['sixteen-matches'][allClubs[0]] = allClubs[1]
@@ -96,6 +103,11 @@ def loadGame(screen):
     global resultsLoading
     global mainMatch
     global matchCount
+    global commentaryFound
+    global currEndMatchTypeTime
+    global commentaryCSV    
+    global information
+    global totalCommentary
     if loadingMainUI:
         pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
         rectWidth = pygame.display.get_surface().get_width() / 1.25
@@ -170,7 +182,7 @@ def loadGame(screen):
             screen.blit(clubSurface, club.topleft)
             if not fullRoundLoaded[0]:
                 pygame.display.update() 
-                time.sleep(0.1)
+                time.sleep(1)
                 
         if fullRoundLoaded[0] is False:
             fullRoundLoaded = [True, time.time()]
@@ -200,9 +212,63 @@ def loadGame(screen):
         returnToMainMenuSurface.fill((0, 0, 0, 180))
         screen.blit(returnToMainMenuSurface, returnToMainMenu.topleft)
         screen.blit(backArrow, (returnToMainMenu.x + returnToMainMenu.width / 2 - backArrow.get_width() / 2, returnToMainMenu.y + returnToMainMenu.height / 2 - backArrow.get_height() / 2))
-        
 
+        if not commentaryFound:
+            if not (currEndMatchTypeTime + 2 < time.time()):
+                try:
+                    teamOne = pygame.image.load(f"./components/MainGame/media/baseNames/{list(output[currentMatchType[:-8]+'-results'][matchCount].keys())[1]}.png")
+                    teamOne = pygame.transform.scale(teamOne, (teamOne.get_width() / 4, teamOne.get_height() / 4))
+                    teamTwo = pygame.image.load(f"./components/MainGame/media/baseNames/{list(output[currentMatchType[:-8]+'-results'][matchCount].keys())[2]}.png")
+                    teamTwo = pygame.transform.scale(teamTwo, (teamTwo.get_width() / 4, teamTwo.get_height() / 4))
+                    screen.blit(teamOne, (game.x + game.width / 4 - teamOne.get_width() / 2, game.y + 50))
+                    screen.blit(teamTwo, (game.x + (game.width - game.width / 4) - teamOne.get_width() / 2, game.y + 50))
+                    """font = pygame.font.Font(None, 40)
+                    scoreOne = font.render(str(output[currentMatchType[:-8]+'-results'][matchCount][list(output[currentMatchType[:-8]+'-results'][matchCount].keys())[1]]), True, (255, 255, 255))
+                    screen.blit(scoreOne, (game.x + game.width / 2 - scoreOne.get_width() / 2, game.y + 50 + teamOne.get_height() + 10))
+                    scoreTwo = font.render(str(output[currentMatchType[:-8]+'-results'][matchCount][list(output[currentMatchType[:-8]+'-results'][matchCount].keys())[2]]), True, (255, 255, 255))
+                    screen.blit(scoreTwo, (game.x + game.width / 2 - scoreTwo.get_width() / 2, game.y + 50 + teamOne.get_height() + 10 + scoreOne.get_height() + 10))"""
+                    return False
+                except KeyError:
+                    return False
+            if len(output[currentMatchType[:-8]+'-results']) > matchCount:
+                teamOne = pygame.image.load(f"./components/MainGame/media/baseNames/{list(output[currentMatchType[:-8]+'-results'][matchCount].keys())[1]}.png")
+                teamOne = pygame.transform.scale(teamOne, (teamOne.get_width() / 4, teamOne.get_height() / 4))
+                teamTwo = pygame.image.load(f"./components/MainGame/media/baseNames/{list(output[currentMatchType[:-8]+'-results'][matchCount].keys())[2]}.png")
+                teamTwo = pygame.transform.scale(teamTwo, (teamTwo.get_width() / 4, teamTwo.get_height() / 4))
+                screen.blit(teamOne, (game.x + game.width / 4 - teamOne.get_width() / 2, game.y + 50))
+                screen.blit(teamTwo, (game.x + (game.width - game.width / 4) - teamOne.get_width() / 2, game.y + 50))
+                
+                totalGoals = output[currentMatchType[:-8]+'-results'][matchCount][list(output[currentMatchType[:-8]+'-results'][matchCount].keys())[1]] + output[currentMatchType[:-8]+'-results'][matchCount][list(output[currentMatchType[:-8]+'-results'][matchCount].keys())[2]]
+                
+                for goal in range(totalGoals):
+                    if goal < output[currentMatchType[:-8]+'-results'][matchCount][list(output[currentMatchType[:-8]+'-results'][matchCount].keys())[1]]:
+                        team = list(output[currentMatchType[:-8]+'-results'][matchCount].keys())[1]
+                    else:
+                        team = list(output[currentMatchType[:-8]+'-results'][matchCount].keys())[2]
+                    
+                    
+                    commentary = random.choice(commentaryCSV["Scoring"]).replace("[Player Name]", random.choice(information["clubs"][team]["players"]))
+                    font = pygame.font.Font(None, 30)
+                    text = font.render(commentary, True, (255, 255, 255))
+                    screen.blit(text, (game.x + game.width / 2 - text.get_width() / 2, game.y + 150 + goal * 40+20))
+                    pygame.display.update()
+                    time.sleep(1) 
+                
 
+                print(output)
+                currEndMatchTypeTime = time.time()
+            else:
+                if currentMatchType == "finals-matches":
+                    commentaryFound = True
+                    resultsLoading = True
+                    currentMatchType = "sixteen-matches"
+                else:
+                    currentMatchType = gameStore[0]['match-types'][gameStore[0]['match-types'].index(currentMatchType)+1]
+                    print(currentMatchType)
+                    matchCount = 0
+                    loadGame(screen)
+                    return False
+                        
 
         
         
@@ -214,10 +280,6 @@ def loadGame(screen):
         """
         LOOP THROUGH OUTPUT JSON
         DO COMMENTARY DEPENDENT ON NUMBER OF GOALS SCORED AND THE HAVE A CERT. PERCENTAGE OF FAILED GOAL WHERE USE DEFENCE COMMENTARY AND ADD ONE TO THE TOTAL GOAL TO MAKE ANOTHER GOAL HAPPEN :D
-        
-        
-        
-        
         """
     else:
         return False
@@ -228,6 +290,8 @@ def gameListener(screen, mousePosition):
     global returnToMainMenuSurface
     global loadingMainUI
     global fullRoundLoaded
+    global commentaryFound
+    global resultsLoading
     if returnToMainMenu.collidepoint(mousePosition):
         pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
         returnToMainMenuSurface.fill((192, 192, 192, 50))
@@ -235,7 +299,9 @@ def gameListener(screen, mousePosition):
         pygame.display.update()
         if pygame.mouse.get_pressed(num_buttons=3)[0]:
             loadingMainUI = True
-            fullRoundLoaded = False
+            fullRoundLoaded = [False, 0]
+            resultsLoading = False
+            commentaryFound = False
             return False
     else:
         pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW) 
