@@ -1,85 +1,85 @@
 {
     "sixteen-results": {
         "0": {
-            "winner": "Porto",
-            "Juventus": 2,
-            "Porto": 3
+            "winner": "AC Milan",
+            "Liverpool": 2,
+            "AC Milan": 6
         },
         "1": {
-            "winner": "Atletico Madrid",
-            "Ajax": 4,
-            "Atletico Madrid": 5
+            "winner": "Inter Milan",
+            "Manchester City": 1,
+            "Inter Milan": 4
         },
         "2": {
-            "winner": "Tottenham Hotspur",
-            "FC Barcelona": 2,
-            "Tottenham Hotspur": 4
+            "winner": "FC Barcelona",
+            "Borussia Dortmund": 4,
+            "FC Barcelona": 5
         },
         "3": {
-            "winner": "Paris Saint-Germain",
-            "Bayern Munich": 1,
-            "Paris Saint-Germain": 6
+            "winner": "Real Madrid",
+            "Juventus": 0,
+            "Real Madrid": 1
         },
         "4": {
-            "winner": "Benfica",
-            "Manchester United": 5,
-            "Benfica": 6
+            "winner": "Tottenham Hotspur",
+            "Bayern Munich": 0,
+            "Tottenham Hotspur": 3
         },
         "5": {
-            "winner": "AC Milan",
-            "Manchester City": 0,
-            "AC Milan": 4
+            "winner": "Porto",
+            "Atletico Madrid": 3,
+            "Porto": 5
         },
         "6": {
-            "winner": "Real Madrid",
-            "Inter Milan": 2,
-            "Real Madrid": 4
+            "winner": "Paris Saint-Germain",
+            "Benfica": 1,
+            "Paris Saint-Germain": 4
         },
         "7": {
-            "winner": "Liverpool",
-            "Borussia Dortmund": 1,
-            "Liverpool": 3
+            "winner": "Ajax",
+            "Manchester United": 0,
+            "Ajax": 1
         }
     },
     "quarter-results": {
         "0": {
-            "winner": "Atletico Madrid",
-            "Porto": 0,
-            "Atletico Madrid": 2
+            "winner": "Inter Milan",
+            "AC Milan": 0,
+            "Inter Milan": 2
         },
         "1": {
-            "winner": "Paris Saint-Germain",
-            "Tottenham Hotspur": 2,
-            "Paris Saint-Germain": 4
+            "winner": "Real Madrid",
+            "FC Barcelona": 3,
+            "Real Madrid": 4
         },
         "2": {
-            "winner": "AC Milan",
-            "Benfica": 3,
-            "AC Milan": 5
+            "winner": "Porto",
+            "Tottenham Hotspur": 3,
+            "Porto": 4
         },
         "3": {
-            "winner": "Liverpool",
-            "Real Madrid": 3,
-            "Liverpool": 5
+            "winner": "Ajax",
+            "Paris Saint-Germain": 0,
+            "Ajax": 5
         }
     },
     "semi-results": {
         "0": {
-            "winner": "Paris Saint-Germain",
-            "Atletico Madrid": 1,
-            "Paris Saint-Germain": 2
+            "winner": "Real Madrid",
+            "Inter Milan": 4,
+            "Real Madrid": 5
         },
         "1": {
-            "winner": "Liverpool",
-            "AC Milan": 3,
-            "Liverpool": 5
+            "winner": "Ajax",
+            "Porto": 0,
+            "Ajax": 1
         }
     },
     "finals-results": {
         "0": {
-            "winner": "Liverpool",
-            "Paris Saint-Germain": 0,
-            "Liverpool": 6
+            "winner": "Ajax",
+            "Real Madrid": 2,
+            "Ajax": 4
         }
     }
 }

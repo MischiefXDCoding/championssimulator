@@ -214,19 +214,20 @@ def loadGame(screen):
         screen.blit(backArrow, (returnToMainMenu.x + returnToMainMenu.width / 2 - backArrow.get_width() / 2, returnToMainMenu.y + returnToMainMenu.height / 2 - backArrow.get_height() / 2))
 
         if not commentaryFound:
-            if not (currEndMatchTypeTime + 2 < time.time()):
+            if not (currEndMatchTypeTime + 4 < time.time()):
                 try:
-                    teamOne = pygame.image.load(f"./components/MainGame/media/baseNames/{list(output[currentMatchType[:-8]+'-results'][matchCount].keys())[1]}.png")
+                    teamOne = pygame.image.load(f"./components/MainGame/media/baseNames/{list(output[currentMatchType[:-8]+'-results'][matchCount-1].keys())[1]}.png")
                     teamOne = pygame.transform.scale(teamOne, (teamOne.get_width() / 4, teamOne.get_height() / 4))
-                    teamTwo = pygame.image.load(f"./components/MainGame/media/baseNames/{list(output[currentMatchType[:-8]+'-results'][matchCount].keys())[2]}.png")
+                    teamTwo = pygame.image.load(f"./components/MainGame/media/baseNames/{list(output[currentMatchType[:-8]+'-results'][matchCount-1].keys())[2]}.png")
                     teamTwo = pygame.transform.scale(teamTwo, (teamTwo.get_width() / 4, teamTwo.get_height() / 4))
                     screen.blit(teamOne, (game.x + game.width / 4 - teamOne.get_width() / 2, game.y + 50))
                     screen.blit(teamTwo, (game.x + (game.width - game.width / 4) - teamOne.get_width() / 2, game.y + 50))
-                    """font = pygame.font.Font(None, 40)
-                    scoreOne = font.render(str(output[currentMatchType[:-8]+'-results'][matchCount][list(output[currentMatchType[:-8]+'-results'][matchCount].keys())[1]]), True, (255, 255, 255))
-                    screen.blit(scoreOne, (game.x + game.width / 2 - scoreOne.get_width() / 2, game.y + 50 + teamOne.get_height() + 10))
-                    scoreTwo = font.render(str(output[currentMatchType[:-8]+'-results'][matchCount][list(output[currentMatchType[:-8]+'-results'][matchCount].keys())[2]]), True, (255, 255, 255))
-                    screen.blit(scoreTwo, (game.x + game.width / 2 - scoreTwo.get_width() / 2, game.y + 50 + teamOne.get_height() + 10 + scoreOne.get_height() + 10))"""
+                    score = pygame.image.load(f"./components/MainGame/media/scores/{numberToWord[output[currentMatchType[:-8]+'-results'][matchCount-1][list(output[currentMatchType[:-8]+'-results'][matchCount-1].keys())[1]]]}.png")
+                    scoreTwo = pygame.image.load(f"./components/MainGame/media/scores/{numberToWord[output[currentMatchType[:-8]+'-results'][matchCount-1][list(output[currentMatchType[:-8]+'-results'][matchCount-1].keys())[2]]]}.png")
+                    scoreTwo = pygame.transform.scale(scoreTwo, (scoreTwo.get_width() / 4, scoreTwo.get_height() / 4))
+                    score = pygame.transform.scale(score, (score.get_width() / 4, score.get_height() / 4))
+                    screen.blit(score, (game.x + game.width / 4 - score.get_width() / 2, game.y + 100))
+                    screen.blit(scoreTwo, (game.x + (game.width - game.width / 4) - teamOne.get_width() / 2, game.y + 100))
                     return False
                 except KeyError:
                     return False
@@ -252,7 +253,7 @@ def loadGame(screen):
                     text = font.render(commentary, True, (255, 255, 255))
                     screen.blit(text, (game.x + game.width / 2 - text.get_width() / 2, game.y + 150 + goal * 40+20))
                     pygame.display.update()
-                    time.sleep(1) 
+                    time.sleep(2)
                 
 
                 print(output)
@@ -275,12 +276,6 @@ def loadGame(screen):
 
 
         matchCount += 1
-
-
-        """
-        LOOP THROUGH OUTPUT JSON
-        DO COMMENTARY DEPENDENT ON NUMBER OF GOALS SCORED AND THE HAVE A CERT. PERCENTAGE OF FAILED GOAL WHERE USE DEFENCE COMMENTARY AND ADD ONE TO THE TOTAL GOAL TO MAKE ANOTHER GOAL HAPPEN :D
-        """
     else:
         return False
 
