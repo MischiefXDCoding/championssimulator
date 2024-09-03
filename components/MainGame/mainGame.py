@@ -85,10 +85,6 @@ def loadGameInformation():
     matchSimulation("semi-matches")
     matchSimulation("finals-matches")
 
-
-    with open("output.json", 'w') as file:
-        json.dump(output, file, indent=4)
-
 def loadGame(screen):
     global game
     global returnToMainMenuSurface
