@@ -5,7 +5,6 @@ import os
 import json
 import random
 
-inMenu = True
 loadingMainUI = True
 game = None
 returnToMainMenu = None
@@ -24,7 +23,7 @@ commentaryFound = False
 currEndMatchTypeTime = 0
 commentaryCSV = { "Attack": [], "Scoring": [], "Defend": [],  "Foul": [], "Penalty": [], "Ref Decision": [], "Man of the Match": [], "Outcome": [] }
 information = { "clubs": {  }, "commentary": { "Attack": [], "Scoring": [], "Defend": [],  "Foul": [], "Penalty": [], "Ref Decision": [], "Man of the Match": [], "Outcome": [] }, "players": {} }
-totalCommentary = []
+
 
 def loadGameInformation():
     global gameStore
@@ -78,7 +77,7 @@ def loadGameInformation():
             gameStore[0][gameStore[0]['match-types'][gameStore[0]['match-types'].index(matchType)+1][:-8]+"-teams"].append(winner) if matchType != "finals-matches" else None
 
             if matchType == "finals-matches":
-                print("Winner of the Tournament: ", winner)
+                pass
 
     matchSimulation("sixteen-matches")
     matchSimulation("quarter-matches")
@@ -103,7 +102,6 @@ def loadGame(screen):
     global currEndMatchTypeTime
     global commentaryCSV    
     global information
-    global totalCommentary
     if loadingMainUI:
         pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
         rectWidth = pygame.display.get_surface().get_width() / 1.25
@@ -252,7 +250,6 @@ def loadGame(screen):
                     time.sleep(2)
                 
 
-                print(output)
                 currEndMatchTypeTime = time.time()
             else:
                 if currentMatchType == "finals-matches":
@@ -261,7 +258,6 @@ def loadGame(screen):
                     currentMatchType = "sixteen-matches"
                 else:
                     currentMatchType = gameStore[0]['match-types'][gameStore[0]['match-types'].index(currentMatchType)+1]
-                    print(currentMatchType)
                     matchCount = 0
                     loadGame(screen)
                     return False

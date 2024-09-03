@@ -30,12 +30,6 @@ def loadMenu(screen):
     screen.blit(startGameButton, startGameButtonPosition)
 
 
-
-def startGame():
-    #pygame.draw.rect(screen, (255, 0, 0), (100, 100, 100, 300)) # x, y, width, height
-    pass
-
-
 def menuListener(screen, mousePosition):
     global startGameButton
     global startGameButtonPosition

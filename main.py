@@ -42,6 +42,7 @@ while running:
 
     else:
         print("ERROR: No menu loaded")
+        running = False
     pygame.display.flip()
 
     clock.tick(60) 
