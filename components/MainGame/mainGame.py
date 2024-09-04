@@ -23,7 +23,7 @@ class MainGame():
         self.currEndMatchTypeTime = 0
         self.commentaryCSV = { "Attack": [], "Scoring": [], "Defend": [],  "Foul": [], "Penalty": [], "Ref Decision": [], "Man of the Match": [], "Outcome": [] }
         self.information = { "clubs": {  }, "commentary": { "Attack": [], "Scoring": [], "Defend": [],  "Foul": [], "Penalty": [], "Ref Decision": [], "Man of the Match": [], "Outcome": [] }, "players": {} }
-
+        self.backgroundImage = pygame.image.load("mainBackground.png")
 
     def loadGameInformation(self):
         self.gameStore = [{ "sixteen-matches": {}, "quarter-matches": {}, "semi-matches": {}, "finals-matches": {}, "quarter-teams": [], "semi-teams": [], "finals-teams": [], "match-types": ["sixteen-matches", "quarter-matches", "semi-matches", "finals-matches"] }]
@@ -185,6 +185,21 @@ class MainGame():
                     except KeyError:
                         return False
                 if len(self.output[self.currentMatchType[:-8]+'-results']) > self.matchCount:
+                    if self.matchCount == 0 and self.currentMatchType == "sixteen-matches":
+                        tournTitle = pygame.image.load(f'./components/MainGame/media/baseNames/{self.currentMatchType}.png')
+                        tournTitle = pygame.transform.scale(tournTitle, (tournTitle.get_width() / 4, tournTitle.get_height() / 4))
+                        screen.blit(self.backgroundImage, (0, 0))
+                        screen.blit(rectSurface, self.game.topleft)
+                        screen.blit(tournTitle, (self.game.x + self.game.width / 2 - tournTitle.get_width() / 2, self.game.y + self.game.height / 2 - tournTitle.get_height() / 2))
+                        screen.blit(self.backArrow, (self.returnToMainMenu.x + self.returnToMainMenu.width / 2 - self.backArrow.get_width() / 2, self.returnToMainMenu.y + self.returnToMainMenu.height / 2 - self.backArrow.get_height() / 2))
+                        pygame.display.update()
+                        time.sleep(3)
+                        tournTitle = pygame.image.load(f'./components/MainGame/media/baseNames/{self.currentMatchType}.png')
+                        tournTitle = pygame.transform.scale(tournTitle, (tournTitle.get_width() / 4, tournTitle.get_height() / 4))
+                        screen.blit(self.backgroundImage, (0, 0))
+                        screen.blit(rectSurface, self.game.topleft)
+                        screen.blit(self.backArrow, (self.returnToMainMenu.x + self.returnToMainMenu.width / 2 - self.backArrow.get_width() / 2, self.returnToMainMenu.y + self.returnToMainMenu.height / 2 - self.backArrow.get_height() / 2))
+                        pygame.display.update()
                     teamOne = pygame.image.load(f"./components/MainGame/media/baseNames/{list(self.output[self.currentMatchType[:-8]+'-results'][self.matchCount].keys())[1]}.png")
                     teamOne = pygame.transform.scale(teamOne, (teamOne.get_width() / 4, teamOne.get_height() / 4))
                     teamTwo = pygame.image.load(f"./components/MainGame/media/baseNames/{list(self.output[self.currentMatchType[:-8]+'-results'][self.matchCount].keys())[2]}.png")
@@ -206,7 +221,7 @@ class MainGame():
                         text = font.render(commentary, True, (255, 255, 255))
                         screen.blit(text, (self.game.x + self.game.width / 2 - text.get_width() / 2, self.game.y + 150 + goal * 40+20))
                         pygame.display.update()
-                        time.sleep(2)
+                        time.sleep(1.5)
                     
 
                     self.currEndMatchTypeTime = time.time()
@@ -219,6 +234,15 @@ class MainGame():
                         self.currentMatchType = self.gameStore[0]['match-types'][self.gameStore[0]['match-types'].index(self.currentMatchType)+1]
                         self.matchCount = 0
                         self.loadGame(screen)
+
+                        tournTitle = pygame.image.load(f'./components/MainGame/media/baseNames/{self.currentMatchType}.png')
+                        tournTitle = pygame.transform.scale(tournTitle, (tournTitle.get_width() / 4, tournTitle.get_height() / 4))
+                        screen.blit(self.backgroundImage, (0, 0))
+                        screen.blit(rectSurface, self.game.topleft)
+                        screen.blit(tournTitle, (self.game.x + self.game.width / 2 - tournTitle.get_width() / 2, self.game.y + self.game.height / 2 - tournTitle.get_height() / 2))
+                        screen.blit(self.backArrow, (self.returnToMainMenu.x + self.returnToMainMenu.width / 2 - self.backArrow.get_width() / 2, self.returnToMainMenu.y + self.returnToMainMenu.height / 2 - self.backArrow.get_height() / 2))
+                        pygame.display.update()
+                        time.sleep(3)
                         return False
                             
 
