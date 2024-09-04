@@ -1,6 +1,6 @@
 import pygame
-from components.MainMenu.mainMenu import loadMenu as loadMainMenu, menuListener as mainMenuListener
-from components.MainGame.mainGame import loadGame as loadMainGame, gameListener as mainGameListener, loadGameInformation as loadMainGameInformation
+from components.MainMenu.mainMenu import MainMenu #loadMenu as loadMainMenu, menuListener as mainMenuListener
+from components.MainGame.mainGame import MainGame  # as loadMainGame, gameListener as mainGameListener, loadGameInformation as loadMainGameInformation
 
 
 ## Base GUI
@@ -11,7 +11,8 @@ clock = pygame.time.Clock()
 running = True
 mainmenu = True
 maingame = False
-
+MainMenu = MainMenu()
+MainGame = MainGame()
 
 gameComponents = {
 
@@ -26,16 +27,16 @@ while running:
         if event.type == pygame.QUIT:
             running = False
     if mainmenu:
-        loadMainMenu(screen)
-        mainmenureturn = mainMenuListener(screen, pygame.mouse.get_pos())
+        MainMenu.loadMenu(screen = screen)
+        mainmenureturn = MainMenu.menuListener(screen, pygame.mouse.get_pos())
         if mainmenureturn is False:
             mainmenu = False
             maingame = True
-            loadMainGameInformation()
+            MainGame.loadGameInformation()
 
     elif maingame:
-        loadMainGame(screen)
-        maingamereturn = mainGameListener(screen, pygame.mouse.get_pos())
+        MainGame.loadGame(screen)
+        maingamereturn = MainGame.gameListener(screen = screen, mousePosition = pygame.mouse.get_pos())
         if maingamereturn is False:
             mainmenu = True
             maingame = False
