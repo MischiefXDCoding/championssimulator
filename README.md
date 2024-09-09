@@ -1,4 +1,4 @@
-# Football Euros Simulator
+# Football Champions Simulator
 Champions Simulator Python GUI Project (Summer '24)
 
 ## Installation:
